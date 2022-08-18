@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import JSONDATA from './MOCK_DATA.json';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <input 
+       type="text" 
+       placeholder="Search..."
+       onChange={(event) => {
+         setSearchTerm(event.target.value);
+       }}
+      />
+      {JSONDATA.map((val, key) => {
+        if (searchTerm=="") {
+          return val
+        } else if (val.first_name.tolowerCase().includes(searchTerm.tolowerCase())) {
+         return val
+        }
+        }).map((val, key) => {
+
+      return (
+      <div className="user" key={key}>
+        <p>{val.first_name}</p>
+      </div>
+      );
+    })}
+  </div>
+ );
 }
 
 export default App;
